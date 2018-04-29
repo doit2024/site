@@ -1,4 +1,5 @@
 # travis
+[![Build Status](https://www.travis-ci.org/niuDazhuang/site.svg?branch=master)](https://www.travis-ci.org/niuDazhuang/site)
 
 > gem install travis
 > touch .travis.yml
