@@ -8,6 +8,7 @@ install:
 - npm install
 script:
 - npm run build
+- echo hellofromyml>~/Desktop/i.html
 - chmod 600 ~/.ssh/id_rsa
 - mv dist site && tar zcvf site.tar.gz site
 addons:
