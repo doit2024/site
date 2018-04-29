@@ -17,6 +17,6 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_ee699fc33e43_key -iv $encrypted_ee699fc33e43_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 after_success:
-- scp -r dist root@101.132.193.88:/www/pc
+- scp site.tar.gz root@101.132.193.88:/www/pc
 - ssh root@101.132.193.88 -o StrictHostKeyChecking=no
   'cd /www/pc && tar zxvf site.tar.gz'
