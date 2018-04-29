@@ -1,30 +1,34 @@
-# site
+# travis
 
-> A Vue.js project
+> gem install travis
+> touch .travis.yml
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+```
+language: node_js
+node_js:
+- '8'
+branchs:
+  only:
+  - master
+install:
+- npm install
+script:
+- npm run build
+- chmod 600 ~/.ssh/id_rsa
+- mv dist site && tar zcvf site.tar.gz site
+addons:
+  ssh_known_hosts:
+  - 101.132.193.88
+after_success:
+- scp site.tar.gz root@101.132.193.88:/www/pc
+- ssh root@101.132.193.88 -o StrictHostKeyChecking=no
+  'cd /www/pc && tar zxvf site.tar.gz'
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+> travis encrypt-file ~/.ssh/id_rsa --add
+
+```
+before_install:
+- openssl aes-256-cbc -K $encrypted_ee699fc33e43_key -iv $encrypted_ee699fc33e43_iv
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
+```
