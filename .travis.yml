@@ -16,5 +16,5 @@ before_install:
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 after_success:
 - chmod 600 ~/.ssh/id_rsa
-- ssh root@101.132.193.88 -o StrictHostKeyChecking=no
-  'cd /www/pc/site && git pull && npm install && npm run build'
+#- ssh root@101.132.193.88 -o StrictHostKeyChecking=no
+- scp -r dist root@101.132.193.88:/www/pc/site
